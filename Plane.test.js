@@ -39,5 +39,10 @@ describe("Plane",function (){
         plane.whereTo("New York")
         expect(plane.destination).toEqual("New York")
     })
+    test("has location", function () {
+        const plane = new Plane({model:'747'})
+        plane.setLocation("JFK")
+        expect(plane.location).toEqual("JFK")
+    })
 
 })

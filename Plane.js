@@ -5,6 +5,7 @@ class Plane{
         this.fuel = 0
         this.bags = []
         this.destination = ""
+        this.location = ""
     }
     addBag(bag){
         this.bags.push(bag)
@@ -15,6 +16,9 @@ class Plane{
     }
     addFuel(fuel){
         this.fuel = this.fuel + fuel
+    }
+    setLocation(name){
+        this.location = name
     }
     whereTo(name){
         this.destination = name
