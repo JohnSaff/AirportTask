@@ -2,6 +2,7 @@ const Passenger = require("./Passenger.js")
 const Bag = require("./bag.js")
 const Plane = require("./Plane.js")
 const Airport = require("./Airport.js")
+const { getVersion } = require("jest")
 
 describe("airport", function () {
     test("airport exists",function(){
@@ -58,5 +59,32 @@ describe("airport", function () {
         expect(JFK.planes[0]).toEqual(plane1)
         expect(LHR.planes[0]).toEqual(plane2)
         expect(LAX.planes.length).toEqual(0)
+    })
+    test("get airport data from callback", function (done){
+        const LHR = new Airport({name:"LHR"})
+
+        LHR.getInfo((err,info)=>{
+            expect(err).toBeNull()
+            expect(info.city).toEqual("London")
+            console.log(info)
+            done()
+        })
+
+
+    })
+    test("same as the last but a promise", function (){
+        const LHR = new Airport({name:"LHR"})
+        return LHR.getInfoPromise().then(info =>{
+            expect(info.city).toEqual('London')
+        })
+        .catch(err =>{
+            expect(err).toBeNull
+        })
+    })
+
+    test("once more but with an await", async function() {
+        const LHR = new  Airport({name:"LHR"})
+        const airport = await LHR.getInfoAwait()
+        expect(airport.city).toEqual("London")
     })
 })
